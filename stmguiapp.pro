@@ -11,17 +11,21 @@ APP = ../../../iar/test/361_ocill
 #APP = ../../../iar/test/352Pult
 # ---------------------------------
 
+DEFINES += APP_PATH="$$APP"
+DEFINES += SFS_FILE="$$PWD/$$APP/sfs.bin"
 
 STM32 = ../../../iar/components/stm32++/src
 INCLUDEPATH += $$PWD/app
 INCLUDEPATH += $$STM32
 INCLUDEPATH += $$STM32/gfx
 INCLUDEPATH += $$STM32/gfx/gui
+INCLUDEPATH += $$APP
 
 #COMPONENTS = ../../components5
 #include($$COMPONENTS/megaWidgets/megaWidgets.pri)
 
 SOURCES += \
+    ethernet/sfs.cpp \
     main.cpp \
     application.cpp \
     button.cpp \

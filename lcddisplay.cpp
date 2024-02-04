@@ -6,7 +6,7 @@ LcdDisplay::LcdDisplay(int width, int height) :
 {
     m_timer.setInterval(16);
     connect(&m_timer, &QTimer::timeout, this, &LcdDisplay::updateScreen);
-    m_img = QImage(width, height, QImage::Format_RGB16);
+    m_img = QImage(width, height, QImage::Format_ARGB32_Premultiplied);
 }
 
 void LcdDisplay::setFps(int fps)
@@ -66,7 +66,7 @@ void LcdDisplay::paintEvent(QPaintEvent *event)
 
 void LcdDisplay::updateScreen()
 {
-    m_img.fill(0);
+    m_img.fill(0xFF000000);
     QPainter p(&m_img);
 
     for (int i=0; i<2; i++)
