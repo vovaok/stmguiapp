@@ -8,7 +8,9 @@ typedef qintptr SocketDescriptor_t;
 
 class TcpSocket : public QTcpSocket
 {
+    Q_OBJECT
 public:
+    TcpSocket();
     NotifyEvent onConnect;
     NotifyEvent onDisconnect;
     NotifyEvent onReadyRead;

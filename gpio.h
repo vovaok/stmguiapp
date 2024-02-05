@@ -1,6 +1,8 @@
 #ifndef GPIO_H
 #define GPIO_H
 
+typedef void GPIO_TypeDef;
+
 #define PINCONFIG(pin, flags, af, periph) ((pin) | ((flags)<<8) | ((af)<<16) | ((periph)<<24))
 
 class Gpio

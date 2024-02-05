@@ -19,6 +19,15 @@ Button::Button(Gpio::PinName, bool, bool)
     stmApp()->addWidget(this);
 }
 
+Button::Button(GPIO_TypeDef *, int, bool)
+{
+    connect(this, &QAbstractButton::pressed, this, &Button::onPushButtonPress);
+    connect(this, &QAbstractButton::released, this, &Button::onPushButtonRelease);
+    connect(&m_repeatTimer, &QTimer::timeout, this, &Button::onTimer);
+    setCursor(Qt::PointingHandCursor);
+    stmApp()->addWidget(this);
+}
+
 void Button::onPushButtonPress()
 {
     m_repeatTimer.start(500); // m_holdingTime

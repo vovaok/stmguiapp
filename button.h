@@ -13,7 +13,8 @@ class Button : public QPushButton
 
 public:
     Button();
-    Button(Gpio::PinName, bool, bool);
+    Button(Gpio::PinName, bool pullUp=true, bool inverted=true);
+    Button(GPIO_TypeDef *, int , bool inverted=true);
 
     void setAutoRepeat(int timeMs = 200) {m_repeatTime = timeMs;}
     bool isHolding() const {return m_holding;}

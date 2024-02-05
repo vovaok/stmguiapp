@@ -4,6 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
 DEFINES += EMULATOR
+DESTDIR = $$PWD/stmguiapp
 
 
 # specify path to the STM32 project
@@ -11,8 +12,10 @@ APP = ../../../iar/test/361_ocill
 #APP = ../../../iar/test/352Pult
 # ---------------------------------
 
+SFS_FILE = $$PWD/$$APP/sfs.bin
+
 DEFINES += APP_PATH="$$APP"
-DEFINES += SFS_FILE="$$PWD/$$APP/sfs.bin"
+DEFINES += SFS_FILE="$$SFS_FILE"
 
 STM32 = ../../../iar/components/stm32++/src
 INCLUDEPATH += $$PWD/app
@@ -24,8 +27,21 @@ INCLUDEPATH += $$APP
 #COMPONENTS = ../../components5
 #include($$COMPONENTS/megaWidgets/megaWidgets.pri)
 
+win32: {
+    CONFIG(release,debug|release) {
+        QMAKE_POST_LINK += windeployqt --no-translations $$DESTDIR
+        _SRC = $$SFS_FILE
+        _DST = $$DESTDIR/sfs.bin
+        # replace slashes in path for Windows
+        _SRC ~= s,/,\\,g
+        _DST ~= s,/,\\,g
+        QMAKE_POST_LINK += && $$QMAKE_COPY $$shell_quote($$_SRC) $$shell_quote($$_DST) $$escape_expand(\\n\\t)
+    }
+}
+
 SOURCES += \
     ethernet/sfs.cpp \
+    ethernet/tcpsocket.cpp \
     main.cpp \
     application.cpp \
     button.cpp \
@@ -60,6 +76,12 @@ APP_SOURCES = $$files("$$APP/*.cpp", true)
 APP_SOURCES -= "$$APP/main.cpp"
 SOURCES += $$APP_SOURCES
 #HEADERS += $$files("$$APP/*.h", true)
+
+EMU_FILE = $$PWD/$$APP/emulatorwidget.h
+exists($$EMU_FILE) {
+    HEADERS += $$EMU_FILE
+    DEFINES += EMULATOR_WIDGET
+}
 
 FORMS += \
     mainwindow.ui

@@ -11,6 +11,8 @@ Sfs::Sfs()
     static QByteArray sfs_data;
 
     QFile file(_SFS_FILE);
+    if (!file.exists())
+        file.setFileName("sfs.bin");
     if (file.open(QIODevice::ReadOnly))
     {
         sfs_data = file.readAll();
