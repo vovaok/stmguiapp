@@ -50,6 +50,7 @@ SOURCES += \
     lcddisplay.cpp \
     led.cpp \
     mainwindow.cpp \
+    rotaryencoder.cpp \
     timer.cpp \
     $$STM32/gfx/display.cpp \
     $$STM32/gfx/font.cpp \
@@ -68,6 +69,7 @@ HEADERS += \
     lcddisplay.h \
     led.h \
     mainwindow.h \
+    rotaryencoder.h \
     timer.h
 
 SOURCES += $$files("$$STM32/gfx/gui/*.cpp")
