@@ -73,6 +73,7 @@ HEADERS += \
     timer.h
 
 SOURCES += $$files("$$STM32/gfx/gui/*.cpp")
+HEADERS += $$files("$$STM32/gfx/gui/*.h")
 
 APP_SOURCES = $$files("$$APP/*.cpp", true)
 APP_SOURCES -= "$$APP/main.cpp"

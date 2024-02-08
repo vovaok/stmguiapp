@@ -1,12 +1,9 @@
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
 #include <QLabel>
+#include <QToolBar>
 #include <QGraphicsDropShadowEffect>
 #include <QDebug>
-
-#if defined(EMULATOR_WIDGET)
-#include "emulatorwidget.h"
-#endif
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,14 +13,29 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("STM32++ GUI emulator");
     statusBar()->setSizeGripEnabled(false);
 
-    app = new App();
+//    QPushButton *resetBtn = new QPushButton();
+    QToolBar *toolbar = addToolBar("main");
+    toolbar->addAction("Reset", this, &MainWindow::reset);
 
-    DisplayWidget *display = app->displayWidget();
+    mainLayout = new QVBoxLayout;
+    ui->centralwidget->setLayout(mainLayout);
+
+    start();
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::start()
+{
+    app = new App();
+    display = app->displayWidget();
     if (display)
     {
         qDebug() << "Display found:" << display << display->width() << "x" << display->height();
         display->setObjectName("Display");
-        display->setCursor(Qt::CrossCursor);
 
         QGraphicsDropShadowEffect *shadow = new QGraphicsDropShadowEffect;
         shadow->setBlurRadius(10);
@@ -32,20 +44,26 @@ MainWindow::MainWindow(QWidget *parent)
         display->setGraphicsEffect(shadow);
     }
 
-    QVBoxLayout *lay = new QVBoxLayout;
-    ui->centralwidget->setLayout(lay);
-    lay->addWidget(display);
+    mainLayout->addWidget(display);
 
 #if defined(EMULATOR_WIDGET)
-    EmulatorWidget *emu = new EmulatorWidget(app);
-    lay->addWidget(emu);
+    emu = new EmulatorWidget(app);
+    mainLayout->addWidget(emu);
 #endif
-
 }
 
-MainWindow::~MainWindow()
+void MainWindow::reset()
 {
-    delete ui;
+#if defined(EMULATOR_WIDGET)
+    mainLayout->removeWidget(emu);
+#else
+    mainLayout->removeWidget(display);
+#endif
+    delete app;
+    display->deleteLater();
+    emu->deleteLater();
+
+    start();
 }
 
 

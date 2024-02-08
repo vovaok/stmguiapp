@@ -2,7 +2,7 @@
 #include <QPainter>
 
 LcdDisplay::LcdDisplay(int width, int height) :
-    DisplayWidget(width, height)
+    DisplayWidget(width, height, QImage::Format_RGB16)
 {
     m_timer.setInterval(16);
     connect(&m_timer, &QTimer::timeout, this, &LcdDisplay::updateScreen);
