@@ -78,7 +78,7 @@ HEADERS += $$files("$$STM32/gfx/gui/*.h")
 APP_SOURCES = $$files("$$APP/*.cpp", true)
 APP_SOURCES -= "$$APP/main.cpp"
 SOURCES += $$APP_SOURCES
-#HEADERS += $$files("$$APP/*.h", true)
+HEADERS += $$files("$$APP/*.h", true)
 
 EMU_FILE = $$PWD/$$APP/emulatorwidget.h
 exists($$EMU_FILE) {
