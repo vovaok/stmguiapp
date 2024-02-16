@@ -57,6 +57,12 @@ void LcdDisplay::setEnabled(bool enabled)
     }
 }
 
+void LcdDisplay::setSyncEvent(NotifyEvent e, int line)
+{
+    Q_UNUSED(line);
+    onVsync = e;
+}
+
 void LcdDisplay::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
@@ -83,4 +89,7 @@ void LcdDisplay::updateScreen()
     p.end();
 
     QWidget::update();
+
+    if (onVsync)
+        onVsync();
 }

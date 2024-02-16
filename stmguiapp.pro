@@ -69,6 +69,7 @@ HEADERS += \
     lcddisplay.h \
     led.h \
     mainwindow.h \
+    precisetimer.h \
     rotaryencoder.h \
     timer.h
 

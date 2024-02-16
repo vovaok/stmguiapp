@@ -3,6 +3,7 @@
 
 #include "framebuffer.h"
 #include "displaywidget.h"
+#include "core/coretypes.h"
 #include <QTimer>
 
 class LcdDisplay : public DisplayWidget
@@ -33,6 +34,7 @@ public:
     void setLayerColorKeying(int number, Color color);
 
     void setEnabled(bool enabled);
+    void setSyncEvent(NotifyEvent e, int line=-1);
 
 //    virtual void setPixel(int x, int y, uint16_t color) override;
 //    virtual uint16_t pixel(int x, int y) override;
@@ -58,6 +60,8 @@ private:
     Layer m_layer[2];
     QTimer m_timer;
     QImage m_img;
+
+    NotifyEvent onVsync;
 
     void updateScreen();
 };
