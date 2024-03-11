@@ -6,8 +6,10 @@
 #include <QWidget>
 #include "displaywidget.h"
 
-class Application
+class Application : public QObject
 {
+    Q_OBJECT
+
 public:
     static Application *instance();
 
@@ -17,8 +19,13 @@ public:
     void addWidget(QWidget *w); // should be called from widgets when creating them
     DisplayWidget *displayWidget() {return m_display;}
 
+signals:
+    void systemResetRequest();
+
 protected:
     Application();
+
+    void systemReset() {emit systemResetRequest();}
 
 private:
     static Application *m_instance;

@@ -40,6 +40,7 @@ win32: {
 }
 
 SOURCES += \
+    eeprom.cpp \
     ethernet/sfs.cpp \
     ethernet/tcpsocket.cpp \
     main.cpp \
@@ -64,6 +65,7 @@ HEADERS += \
     application.h \
     button.h \
     displaywidget.h \
+    eeprom.h \
     ethernet/tcpserver.h \
     ethernet/tcpsocket.h \
     gpio.h \

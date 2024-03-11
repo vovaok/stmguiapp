@@ -31,6 +31,7 @@ MainWindow::~MainWindow()
 void MainWindow::start()
 {
     app = new App();
+    app->setParent(this);
     display = app->displayWidget();
     if (display)
     {
@@ -50,6 +51,8 @@ void MainWindow::start()
     emu = new EmulatorWidget(app);
     mainLayout->addWidget(emu);
 #endif
+
+    connect(app, &Application::systemResetRequest, this, &MainWindow::reset);
 }
 
 void MainWindow::reset()
@@ -59,7 +62,7 @@ void MainWindow::reset()
 #else
     mainLayout->removeWidget(display);
 #endif
-    delete app;
+    app->deleteLater();
     display->deleteLater();
     emu->deleteLater();
 
