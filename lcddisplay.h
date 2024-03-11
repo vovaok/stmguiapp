@@ -28,6 +28,7 @@ public:
     int getFps();
 
     void configLayer(int number, FrameBuffer *frameBuffer);
+    void setLayerEnabled(int number, bool enabled);
     void setLayerPos(int number, int x, int y);
     void setLayerOpacity(int number, uint8_t alpha);
     void setLayerDefaultColor(int number, Color color);
@@ -56,6 +57,7 @@ private:
         int alpha = 255;
         Color defaultColor;
         Color keyColor;
+        bool enabled = false;
     };
     Layer m_layer[2];
     QTimer m_timer;

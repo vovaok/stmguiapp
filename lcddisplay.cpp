@@ -22,6 +22,12 @@ int LcdDisplay::getFps()
 void LcdDisplay::configLayer(int number, FrameBuffer *frameBuffer)
 {
     m_layer[number-1].fb = frameBuffer;
+    m_layer[number-1].enabled = true;
+}
+
+void LcdDisplay::setLayerEnabled(int number, bool enabled)
+{
+    m_layer[number-1].enabled = enabled;
 }
 
 void LcdDisplay::setLayerPos(int number, int x, int y)
@@ -79,9 +85,19 @@ void LcdDisplay::updateScreen()
     {
         Layer &layer = m_layer[i];
         FrameBuffer *fb = layer.fb;
-        if (!fb)
+        if (!fb || !layer.enabled)
             continue;
-        QImage img(fb->data(), fb->width(), fb->height(), QImage::Format_RGB16);
+        QImage::Format fmt;
+        switch (fb->pixelFormat())
+        {
+        case Format_ARGB8888: fmt = QImage::Format_ARGB32; break;
+        case Format_RGB888: fmt = QImage::Format_RGB888; break;
+        case Format_ARGB4444: fmt = QImage::Format_ARGB4444_Premultiplied; break; // really NOT premultiplied!
+        case Format_ARGB1555: fmt = QImage::Format_RGB555; break;
+        default: fmt = QImage::Format_RGB16;
+        }
+
+        QImage img(fb->data(), fb->width(), fb->height(), fmt);
         p.setOpacity(layer.alpha / 255.0);
         p.drawImage(layer.x, layer.y, img);
     }
