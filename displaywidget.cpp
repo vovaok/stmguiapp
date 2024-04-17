@@ -13,6 +13,8 @@ DisplayWidget::DisplayWidget(int width, int height, QImage::Format format, QWidg
 
 uint32_t DisplayWidget::pixel(int x, int y) const
 {
+    if (m_readable)
+        return Image::pixel(x, y);
     return toRgb(backgroundColor());
 }
 

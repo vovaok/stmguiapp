@@ -8,13 +8,14 @@ DESTDIR = $$PWD/stmguiapp
 
 
 # specify path to the STM32 project
-APP = ../../../iar/test/361_ocill
-#APP = ../../../iar/test/352Pult
+#APP = ../../../iar/test/361_ocill
+APP = ../../../iar/test/352Pult
 # ---------------------------------
 
 SFS_FILE = $$PWD/$$APP/sfs.bin
+APP_PATH = $$PWD/$$APP
 
-DEFINES += APP_PATH="$$APP"
+DEFINES += APP_PATH="$$APP_PATH"
 DEFINES += SFS_FILE="$$SFS_FILE"
 
 STM32 = ../../../iar/components/stm32++/src

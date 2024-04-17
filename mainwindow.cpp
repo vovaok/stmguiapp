@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    resize(500, 500);
     setWindowTitle("STM32++ GUI emulator");
     statusBar()->setSizeGripEnabled(false);
 
@@ -64,7 +65,9 @@ void MainWindow::reset()
 #endif
     app->deleteLater();
     display->deleteLater();
+#if defined(EMULATOR_WIDGET)
     emu->deleteLater();
+#endif
 
     start();
 }
