@@ -1,4 +1,4 @@
-#include "ethernet/sfs.h"
+#include "core/sfs.h"
 #include <QFile>
 #include <QByteArray>
 #include "core/macros.h"

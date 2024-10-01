@@ -47,6 +47,7 @@ void Button::onPushButtonRelease()
     m_repeatTimer.stop();
     m_state = false;
     m_holding = false;
+    m_holdTime = 0;
 
     if (onRelease)
         onRelease();
@@ -55,6 +56,7 @@ void Button::onPushButtonRelease()
 void Button::onTimer()
 {
     m_holding = true;
+    m_holdTime += m_repeatTimer.interval();
     if (m_repeatTime)
     {
         m_repeatTimer.start(m_repeatTime);

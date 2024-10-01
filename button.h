@@ -20,6 +20,7 @@ public:
     bool isHolding() const {return m_holding;}
 
     bool state() const {return m_state;}
+    int holdTime() const {return m_holdTime;}
 
     NotifyEvent onPress;
     NotifyEvent onRelease;
@@ -30,6 +31,7 @@ private:
     int m_repeatTime = 200;
     bool m_state = false;
     bool m_holding = false;
+    int m_holdTime = 0;
 
     void onPushButtonPress();
     void onPushButtonRelease();

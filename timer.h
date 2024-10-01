@@ -3,6 +3,7 @@
 
 #include <QTimer>
 #include "core/coretypes.h"
+#include <functional>
 
 class Timer : public QTimer
 {
@@ -11,11 +12,11 @@ public:
     Timer(QObject *parent = nullptr);
 //    virtual ~Timer();
 
-    NotifyEvent onTimeout;
+    std::function<void(void)> onTimeout;
     //    void (*callback)(void) = nullptr;
 
-    NotifyEvent timeoutEvent() {return onTimeout;}
-    void setTimeoutEvent(NotifyEvent event) {onTimeout = event;}
+//    std::function<void(void)> timeoutEvent() {return onTimeout;}
+//    void setTimeoutEvent(std::function<void(void)> event) {onTimeout = event;}
 
 private:
 
