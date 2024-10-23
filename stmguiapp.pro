@@ -58,6 +58,7 @@ SOURCES += \
     $$STM32/gfx/font.cpp \
     $$STM32/gfx/fontdatabase.cpp \
     $$STM32/gfx/image.cpp \
+    $$STM32/gfx/gradient.cpp \
     $$STM32/gfx/touchscreen.cpp \
     $$STM32/gfx/framebuffer.cpp \
     $$STM32/core/advmath.cpp
