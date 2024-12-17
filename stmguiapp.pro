@@ -8,17 +8,17 @@ DESTDIR = $$PWD/stmguiapp
 
 
 # specify path to the STM32 project
-APP = ../../../iar/test/361_ocill
-#APP = ../../../iar/test/352Pult
+APP = D:/projects/iar/361/oscil429
+#APP = D:/projects/iar/352/352_pult
 # ---------------------------------
 
-SFS_FILE = $$PWD/$$APP/sfs.bin
-APP_PATH = $$PWD/$$APP
+SFS_FILE = $$APP/sfs.bin
+APP_PATH = $$APP
 
 DEFINES += APP_PATH="$$APP_PATH"
 DEFINES += SFS_FILE="$$SFS_FILE"
 
-STM32 = ../../../iar/components/stm32++/src
+STM32 = D:/projects/iar/components/stm32++/src
 INCLUDEPATH += $$PWD/app
 INCLUDEPATH += $$STM32
 INCLUDEPATH += $$STM32/gfx
@@ -41,6 +41,16 @@ win32: {
 }
 
 SOURCES += \
+    ../../iar/components/stm32++/src/modbus/commonproxy.cpp \
+    ../../iar/components/stm32++/src/modbus/genericdevice.cpp \
+    ../../iar/components/stm32++/src/modbus/modbus.cpp \
+    ../../iar/components/stm32++/src/modbus/modbus485.cpp \
+    ../../iar/components/stm32++/src/modbus/modbusdevice.cpp \
+    ../../iar/components/stm32++/src/modbus/modbusmaster.cpp \
+    ../../iar/components/stm32++/src/modbus/modbusproxy.cpp \
+    ../../iar/components/stm32++/src/modbus/modbusslave.cpp \
+    ../../iar/components/stm32++/src/modbus/modbustcp.cpp \
+    ../../iar/components/stm32++/src/modbus/modbustransport.cpp \
     eeprom.cpp \
     ethernet/sfs.cpp \
     ethernet/tcpsocket.cpp \
@@ -64,6 +74,16 @@ SOURCES += \
     $$STM32/core/advmath.cpp
 
 HEADERS += \
+    ../../iar/components/stm32++/src/modbus/commonproxy.h \
+    ../../iar/components/stm32++/src/modbus/genericdevice.h \
+    ../../iar/components/stm32++/src/modbus/modbus.h \
+    ../../iar/components/stm32++/src/modbus/modbus485.h \
+    ../../iar/components/stm32++/src/modbus/modbusdevice.h \
+    ../../iar/components/stm32++/src/modbus/modbusmaster.h \
+    ../../iar/components/stm32++/src/modbus/modbusproxy.h \
+    ../../iar/components/stm32++/src/modbus/modbusslave.h \
+    ../../iar/components/stm32++/src/modbus/modbustcp.h \
+    ../../iar/components/stm32++/src/modbus/modbustransport.h \
     application.h \
     button.h \
     displaywidget.h \
@@ -86,7 +106,7 @@ APP_SOURCES -= "$$APP/main.cpp"
 SOURCES += $$APP_SOURCES
 HEADERS += $$files("$$APP/*.h", true)
 
-EMU_FILE = $$PWD/$$APP/emulatorwidget.h
+EMU_FILE = $$APP/emulatorwidget.h
 exists($$EMU_FILE) {
     HEADERS += $$EMU_FILE
     DEFINES += EMULATOR_WIDGET
